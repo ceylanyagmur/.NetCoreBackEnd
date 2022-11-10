@@ -1,5 +1,5 @@
-﻿using System.Data.SqlClient;
-using System.Data;
+﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace EShopBE.Models
 {
@@ -65,7 +65,6 @@ namespace EShopBE.Models
             {
                 response.StatusCode = 100;
                 response.StatusMessage = "user is invalid";
-
                 response.user = null;
             }
             return response;
@@ -106,11 +105,8 @@ namespace EShopBE.Models
 
 
         public Response updateProfile(Users users, SqlConnection connection)
-
         {
-
             Response response = new Response();
-
             SqlCommand cmd = new SqlCommand("sp_updateProfile", connection);
 
             cmd.CommandType = CommandType.StoredProcedure;
@@ -133,10 +129,7 @@ namespace EShopBE.Models
 
             }
             return response;
-
         }
-
-
 
         public Response addToCart(Cart cart, SqlConnection connection)
         {
@@ -168,11 +161,6 @@ namespace EShopBE.Models
             return response;
         }
 
-
-
-
-
-
         public Response placeOrder(Users users, SqlConnection connection)
 
         {
@@ -196,8 +184,6 @@ namespace EShopBE.Models
             }
             return response;
         }
-
-
         public Response orderList(Users users, SqlConnection connection)
         {
             Response response = new Response();
@@ -239,13 +225,7 @@ namespace EShopBE.Models
         {
 
             Response response = new Response();
-
             SqlCommand cmd = new SqlCommand("sp_AddUpdateShopping", connection);
-
-
-
-
-
 
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Name", shoppings.Name);
@@ -257,11 +237,6 @@ namespace EShopBE.Models
             cmd.Parameters.AddWithValue("@ ImageUrl", shoppings.ImageUrl);
             cmd.Parameters.AddWithValue("@Status", shoppings.Status);
             cmd.Parameters.AddWithValue("@ Type", shoppings.Type);
-
-
-
-
-
 
             connection.Open();
             int i = cmd.ExecuteNonQuery();
@@ -275,29 +250,16 @@ namespace EShopBE.Models
             {
                 response.StatusCode = 100;
                 response.StatusMessage = "Shopping did not save. try again.";
-
             }
             return response;
-
         }
-
-
-
-
-
-
-
-
-
 
         public Response UserList(Users users, SqlConnection connection)
         {
             Response response = new Response();
             List<Users> listUsers = new List<Users>();
-            SqlDataAdapter da = new SqlDataAdapter("sp_UserList",
-                                                   connection);
+            SqlDataAdapter da = new SqlDataAdapter("sp_UserList", connection);
             da.SelectCommand.CommandType = CommandType.StoredProcedure;
-
 
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -323,7 +285,6 @@ namespace EShopBE.Models
                     response.StatusMessage = "user dateils fetched";
                     response.listUsers = null;
                 }
-
                 else
                 {
                     response.StatusCode = 10;
@@ -331,22 +292,14 @@ namespace EShopBE.Models
                     response.listUsers = null;
                 }
             }
-
             else
             {
                 response.StatusCode = 10;
                 response.StatusMessage = "user dateils are not available";
                 response.listUsers = null;
             }
-
             return response;
 
         }
-
     }
-    }
-
-
-
-
-
+}

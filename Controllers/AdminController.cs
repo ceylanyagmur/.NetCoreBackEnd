@@ -1,5 +1,4 @@
 ﻿using EShopBE.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
@@ -22,8 +21,7 @@ namespace EShopBE.Controllers
             DAL dal = new DAL();
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
 
-            Response response = dal.addUpdateShopping(shoppings, connection);
-            return response;
+            return dal.addUpdateShopping(shoppings, connection);
         }
 
         [HttpGet]
@@ -33,14 +31,7 @@ namespace EShopBE.Controllers
             DAL dal = new DAL();
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
 
-            Response response = dal.UserList(new Users(),connection);
-            return response;
-        }
-
-
-        
-
-        
+            return dal.UserList(new Users(), connection);
+        } 
     }
-
 }

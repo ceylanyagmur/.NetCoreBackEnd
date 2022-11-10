@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EShopBE.Models;
 using Microsoft.AspNetCore.Mvc;
-using EShopBE.Models;
-using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 
 namespace EShopBE.Controllers
@@ -11,21 +9,19 @@ namespace EShopBE.Controllers
     public class ShoppingsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-
         public ShoppingsController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+
         [HttpPost]
         [Route("addToCart")]
         public Response addToCart(Cart cart)
         {
             DAL dal = new DAL();
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
-            Response response = dal.addToCart(cart, connection);
-            return response;
-        
-        
+
+            return dal.addToCart(cart, connection);
         }
 
         [HttpPost]
@@ -34,23 +30,18 @@ namespace EShopBE.Controllers
         {
             DAL dal = new DAL();
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
-            Response response = dal.placeOrder(users, connection);
-            return response;
 
-
+            return dal.placeOrder(users, connection);
         }
+
         [HttpPost]
         [Route("orderList")]
         public Response orderList(Users users)
         {
             DAL dal = new DAL();
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
-            Response response = dal.orderList(users, connection);
-            return response;
 
-
+            return dal.orderList(users, connection);
         }
-
-
     }
 }
