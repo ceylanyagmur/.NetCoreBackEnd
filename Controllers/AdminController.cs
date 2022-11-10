@@ -15,11 +15,8 @@ namespace EShopBE.Controllers
             _configuration = configuration;
         }
 
-
-
         [HttpPost]
         [Route("addUpdateShopping")]
-
         public Response addUpdateShopping(Shoppings shoppings)
         {
             DAL dal = new DAL();
@@ -31,7 +28,6 @@ namespace EShopBE.Controllers
 
         [HttpGet]
         [Route("userList")]
-
         public Response userList()
         {
             DAL dal = new DAL();
