@@ -19,7 +19,7 @@ namespace EShopBE.Controllers
         public Response addToCart(Cart cart)
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.addToCart(cart, connection);
         }
@@ -29,7 +29,7 @@ namespace EShopBE.Controllers
         public Response placeOrder(Users users)
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.placeOrder(users, connection);
         }
@@ -39,7 +39,7 @@ namespace EShopBE.Controllers
         public Response orderList(Users users)
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.orderList(users, connection);
         }

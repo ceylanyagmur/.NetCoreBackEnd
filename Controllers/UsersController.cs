@@ -20,7 +20,7 @@ namespace EShopBE.Controllers
         public Response register(Users users)
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.Register(users, connection);
         }
@@ -31,7 +31,7 @@ namespace EShopBE.Controllers
         public Response login(Users users)
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.login(users, connection);
         }
@@ -41,7 +41,7 @@ namespace EShopBE.Controllers
         public Response viewUser(Users users)
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.viewUser(users, connection);
         }
@@ -51,7 +51,7 @@ namespace EShopBE.Controllers
         public Response updateProfile(Users users)
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.updateProfile(users, connection);
         }

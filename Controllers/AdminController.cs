@@ -19,7 +19,7 @@ namespace EShopBE.Controllers
         public Response addUpdateShopping(Shoppings shoppings)
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.addUpdateShopping(shoppings, connection);
         }
@@ -29,7 +29,7 @@ namespace EShopBE.Controllers
         public Response userList()
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EShOPCS").ToString());
+            SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
             return dal.UserList(new Users(), connection);
         } 
