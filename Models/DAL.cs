@@ -254,7 +254,7 @@ namespace EShopBE.Models
             return response;
         }
 
-        public Response UserList(Users users, SqlConnection connection)
+        public Response UserList(SqlConnection connection)
         {
             Response response = new Response();
             List<Users> listUsers = new List<Users>();
@@ -269,11 +269,11 @@ namespace EShopBE.Models
                 {
                     Users user = new Users();
                     user.ID = Convert.ToInt32(dt.Rows[i]["ID"]);
-                    user.FirsName = Convert.ToString(dt.Rows[i]["FirsName"]);
+                    user.FirsName = Convert.ToString(dt.Rows[i]["FirstName"]);
                     user.LastName = Convert.ToString(dt.Rows[i]["LastName"]);
                     user.Password = Convert.ToString(dt.Rows[i]["Password"]);
-                    user.Email = Convert.ToString(dt.Rows[i][" Email"]);
-                    user.Fund = Convert.ToDecimal(dt.Rows[i][" Fund"]);
+                    user.Email = Convert.ToString(dt.Rows[i]["Email"]);
+                    user.Fund = Convert.ToDecimal(dt?.Rows[i]["Fund"]);
                     user.Status = Convert.ToInt32(dt.Rows[i]["Status"]);
                     user.CreatedOn = Convert.ToDateTime(dt.Rows[i]["CreatedOn"]);
 
@@ -283,20 +283,20 @@ namespace EShopBE.Models
                 {
                     response.StatusCode = 200;
                     response.StatusMessage = "user dateils fetched";
-                    response.listUsers = null;
+                    response.ListUsers = listUsers;
                 }
                 else
                 {
                     response.StatusCode = 10;
                     response.StatusMessage = "user dateils are not available";
-                    response.listUsers = null;
+                    response.ListUsers = null;
                 }
             }
             else
             {
                 response.StatusCode = 10;
                 response.StatusMessage = "user dateils are not available";
-                response.listUsers = null;
+                response.ListUsers = null;
             }
             return response;
 

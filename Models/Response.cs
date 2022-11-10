@@ -2,8 +2,6 @@
 {
     public class Response
     {
-        internal object listUsers;
-
         public int StatusCode { get; set; }
         public string StatusMessage { get; set; }
         public List<Users> ListUsers { get; set; }

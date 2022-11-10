@@ -31,7 +31,7 @@ namespace EShopBE.Controllers
             DAL dal = new DAL();
             SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
-            return dal.UserList(new Users(), connection);
+            return dal.UserList(connection);
         } 
     }
 }
