@@ -1,7 +1,10 @@
-﻿namespace EShopBE.Models
+﻿using System.Text.Json.Serialization;
+
+namespace EShopBE.Models
 {
     public class Shoppings
     {
+        [JsonIgnore]
         public int ID { get; set; }
         public string Name { get; set; }
         public string Manufacturer { get; set; }

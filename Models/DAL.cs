@@ -162,7 +162,6 @@ namespace EShopBE.Models
         }
 
         public Response placeOrder(Users users, SqlConnection connection)
-
         {
             Response response = new Response();
             SqlCommand cmd = new SqlCommand("sp_PlaceOrder", connection);
@@ -231,12 +230,12 @@ namespace EShopBE.Models
             cmd.Parameters.AddWithValue("@Name", shoppings.Name);
             cmd.Parameters.AddWithValue("@Manufacturer", shoppings.Manufacturer);
             cmd.Parameters.AddWithValue("@UnitPrice", shoppings.UnitPrice);
-            cmd.Parameters.AddWithValue("@ Discount", shoppings.Discount);
-            cmd.Parameters.AddWithValue("@  Quantity", shoppings.Quantity);
+            cmd.Parameters.AddWithValue("@Discount", shoppings.Discount);
+            cmd.Parameters.AddWithValue("@Quantity", shoppings.Quantity);
             cmd.Parameters.AddWithValue("@ExpDate", shoppings.ExpDate);
-            cmd.Parameters.AddWithValue("@ ImageUrl", shoppings.ImageUrl);
+            cmd.Parameters.AddWithValue("@ImageUrl", shoppings.ImageUrl);
             cmd.Parameters.AddWithValue("@Status", shoppings.Status);
-            cmd.Parameters.AddWithValue("@ Type", shoppings.Type);
+            cmd.Parameters.AddWithValue("@Type", shoppings.Type);
 
             connection.Open();
             int i = cmd.ExecuteNonQuery();
