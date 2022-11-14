@@ -11,7 +11,7 @@ namespace EShopBE.Models
 
             SqlCommand cmd = new SqlCommand("sp_register", connection);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@FirsName", users.FirsName);
+            cmd.Parameters.AddWithValue("@FirstName", users.FirsName);
             cmd.Parameters.AddWithValue("@LastName", users.LastName);
             cmd.Parameters.AddWithValue("@Password", users.Password);
             cmd.Parameters.AddWithValue("@Email", users.Email);
@@ -52,7 +52,7 @@ namespace EShopBE.Models
             if (dt.Rows.Count > 0)
             {
                 user.ID = Convert.ToInt32(dt.Rows[0]["ID"]);
-                user.FirsName = Convert.ToString(dt.Rows[0]["FirsName"]);
+                user.FirsName = Convert.ToString(dt.Rows[0]["FirstName"]);
                 user.LastName = Convert.ToString(dt.Rows[0]["LastName"]);
                 user.Email = Convert.ToString(dt.Rows[0]["Email"]);
                 user.Type = Convert.ToString(dt.Rows[0]["Type"]);
@@ -83,7 +83,7 @@ namespace EShopBE.Models
             if (dt.Rows.Count > 0)
             {
                 user.ID = Convert.ToInt32(dt.Rows[0]["ID"]);
-                user.FirsName = Convert.ToString(dt.Rows[0]["FirsName"]);
+                user.FirsName = Convert.ToString(dt.Rows[0]["FirstName"]);
                 user.LastName = Convert.ToString(dt.Rows[0]["LastName"]);
                 user.Email = Convert.ToString(dt.Rows[0]["Email"]);
                 user.Type = Convert.ToString(dt.Rows[0]["Type"]);
