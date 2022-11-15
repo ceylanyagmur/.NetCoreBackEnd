@@ -15,9 +15,12 @@ namespace EShopBE.Models
             cmd.Parameters.AddWithValue("@LastName", users.LastName);
             cmd.Parameters.AddWithValue("@Password", users.Password);
             cmd.Parameters.AddWithValue("@Email", users.Email);
-            cmd.Parameters.AddWithValue("@Fund", 0);
-            cmd.Parameters.AddWithValue("@Type", "Users");
-            cmd.Parameters.AddWithValue("@Type", "Pending");
+            cmd.Parameters.AddWithValue("@Fund", users.Fund);
+            cmd.Parameters.AddWithValue("@Type", users.Type);
+            cmd.Parameters.AddWithValue("@Status", users.Status);
+            cmd.Parameters.AddWithValue("@CreatedOn", users.CreatedOn);
+            //cmd.Parameters.AddWithValue("@Type", "Users");
+            //cmd.Parameters.AddWithValue("@Type", "Pending");
             connection.Open();
             int i = cmd.ExecuteNonQuery();
             connection.Close();
@@ -34,17 +37,12 @@ namespace EShopBE.Models
             return response;
         }
 
-        /* public Response GetUser()
-         {
-             return user;
-         }*/
-
-        public Response login(Users users, SqlConnection connection)
+        public Response login(string email, string password, SqlConnection connection)
         {
             SqlDataAdapter da = new SqlDataAdapter("sp_login", connection);
             da.SelectCommand.CommandType = CommandType.StoredProcedure;
-            da.SelectCommand.Parameters.AddWithValue("@Email", users.Email);
-            da.SelectCommand.Parameters.AddWithValue("@Password", users.Password);
+            da.SelectCommand.Parameters.AddWithValue("@Email", email);
+            da.SelectCommand.Parameters.AddWithValue("@Password", password);
             DataTable dt = new DataTable();
             da.Fill(dt);
             Response response = new Response();
@@ -70,11 +68,11 @@ namespace EShopBE.Models
             return response;
         }
 
-        public Response viewUser(Users users, SqlConnection connection)
+        public Response viewUser(int userId, SqlConnection connection)
         {
-            SqlDataAdapter da = new SqlDataAdapter("p_viewUser", connection);
+            SqlDataAdapter da = new SqlDataAdapter("sp_viewUser", connection);
             da.SelectCommand.CommandType = CommandType.StoredProcedure;
-            da.SelectCommand.Parameters.AddWithValue("@ID", users.ID);
+            da.SelectCommand.Parameters.AddWithValue("@ID", userId);
 
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -85,20 +83,21 @@ namespace EShopBE.Models
                 user.ID = Convert.ToInt32(dt.Rows[0]["ID"]);
                 user.FirsName = Convert.ToString(dt.Rows[0]["FirstName"]);
                 user.LastName = Convert.ToString(dt.Rows[0]["LastName"]);
-                user.Email = Convert.ToString(dt.Rows[0]["Email"]);
-                user.Type = Convert.ToString(dt.Rows[0]["Type"]);
-                user.Fund = Convert.ToDecimal(dt.Rows[0]["Fund"]);
-                user.CreatedOn = Convert.ToDateTime(dt.Rows[0]["CreatedOn"]);
                 user.Password = Convert.ToString(dt.Rows[0]["Password"]);
+                user.Email = Convert.ToString(dt.Rows[0]["Email"]);
+                user.Fund = Convert.ToDecimal(dt.Rows[0]["Fund"]);
+                user.Type = Convert.ToString(dt.Rows[0]["Type"]);
+                user.CreatedOn = Convert.ToDateTime(dt.Rows[0]["CreatedOn"]);
 
                 response.StatusCode = 200;
                 response.StatusMessage = "user Exists";
+                response.user = user;
             }
             else
             {
                 response.StatusCode = 100;
                 response.StatusMessage = "user does not exist.";
-                response.user = user;
+                response.user = null;
             }
             return response;
         }
@@ -110,6 +109,7 @@ namespace EShopBE.Models
             SqlCommand cmd = new SqlCommand("sp_updateProfile", connection);
 
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ID", users.ID);
             cmd.Parameters.AddWithValue("@FirstName", users.FirsName);
             cmd.Parameters.AddWithValue("@LastName", users.LastName);
             cmd.Parameters.AddWithValue("@Password", users.Password);
@@ -141,7 +141,7 @@ namespace EShopBE.Models
             cmd.Parameters.AddWithValue("@UseId", cart.UseId);
             cmd.Parameters.AddWithValue("@UnitPrice", cart.UnitPrice);
             cmd.Parameters.AddWithValue("@Discount", cart.Discount);
-            cmd.Parameters.AddWithValue("@Quantity", cart.Quantity);
+            cmd.Parameters.AddWithValue("@Quatity", cart.Quantity);
             cmd.Parameters.AddWithValue("@TotalPrice", cart.TotalPrice);
             cmd.Parameters.AddWithValue("@ShoppingID", cart.ShoppingID);
             connection.Open();

@@ -28,22 +28,22 @@ namespace EShopBE.Controllers
         [HttpPost]
         [Route("login")]
 
-        public Response login(Users users)
+        public Response login(string email, string password)
         {
             DAL dal = new DAL();
             SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
-            return dal.login(users, connection);
+            return dal.login(email, password, connection);
         }
 
         [HttpPost]
         [Route("viewUser")]
-        public Response viewUser(Users users)
+        public Response viewUser(int userId)
         {
             DAL dal = new DAL();
             SqlConnection connection = new SqlConnection(_configuration.GetValue<string>("EShOPCS"));
 
-            return dal.viewUser(users, connection);
+            return dal.viewUser(userId, connection);
         }
 
         [HttpPost]
